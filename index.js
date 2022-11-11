@@ -42,6 +42,15 @@ io.on("connection", (socket) => {
   socket.on("thanks", (data) => {
     io.to(data).emit("thanks", socket.id);
   });
+
+  socket.on("request_disable", () => {
+    const ms = Math.min(Math.floor(Math.random() * 1000) * 10, 2000);
+    socket.emit("disable_input", ms);
+  });
+
+  socket.on("request_enable", () => {
+    socket.emit("enable_input");
+  });
 });
 
 server.listen(3000);
